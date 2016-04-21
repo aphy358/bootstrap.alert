@@ -115,7 +115,7 @@
 		var alertParams = {
 			text: message,
 			title: title,
-			opbtn: "twobtn", // 这里的意思是告诉插件在footer那里生成一个“确定”和“取消”按钮
+			opbtn: "twobtn", // 这里的意思是告诉插件在footer那里生成“确定”和“取消”按钮
 			confirm: function(button) {
 				if (callback != null)
 					callback();
