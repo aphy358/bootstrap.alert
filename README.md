@@ -9,7 +9,7 @@
 
 带给alert、confirm提示框不一样的画风。
 
-![View](https://github.com/aphy358/bootstrap.alert/blob/master/screenshot.png)
+![View](https://github.com/aphy358/bootstrap.alert/blob/master/screenshot1.jpg)
 ![View](https://github.com/aphy358/bootstrap.alert/blob/master/screenshot2.png)
 ![View](https://github.com/aphy358/bootstrap.alert/blob/master/screenshot3.jpg)
 
