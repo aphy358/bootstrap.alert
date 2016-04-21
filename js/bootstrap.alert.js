@@ -5,10 +5,8 @@
 	 */
 	$.confirm = function(options) {
 		var fn = function() {
-			if ($(parent.document.body).find('.confirmation-modal').length > 0) {
-				$(parent.document.body).find('.confirmation-modal').remove();
-				$(parent.document.body).find('.modal-backdrop.fade.in').remove();
-			}
+			$(parent.document.body).find('.confirmation-modal').remove();
+			$(parent.document.body).find('.modal-backdrop.fade.in').remove();
 		};
 
 		// 弹窗之前先把之前的弹出框DOM清掉
@@ -73,7 +71,7 @@
 		confirmButton: "Yes",
 		cancelButton: "Cancel",
 		post: false,
-		
+
 		modal: '<div class="confirmation-modal modal fade" tabindex="-1" role="dialog"></div>',
 		modalDialog: '<div class="modal-dialog"></div>',
 		modalContent: '<div class="modal-content"></div>',
