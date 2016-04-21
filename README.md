@@ -1,13 +1,13 @@
-# bootstrap.alert ¼ò½é
+# bootstrap.alert ç®€ä»‹
 
-ÄúÊÇ·ñÒÑ¾­Ñá¾ëÁËwindows×Ô´øµÄalertºÍconfirmÌáÊ¾¿ò£¿
+æ‚¨æ˜¯å¦å·²ç»åŒå€¦äº†windowsè‡ªå¸¦çš„alertå’Œconfirmæç¤ºæ¡†ï¼Ÿ
 
-ÎÒÏëÄã»áÏ²»¶Õâ¸ö.
+æˆ‘æƒ³ä½ ä¼šå–œæ¬¢è¿™ä¸ª.
 
 
 ## PreView
 
-´ø¸øalert¡¢confirmÌáÊ¾¿ò²»Ò»ÑùµÄ»­·ç¡£
+å¸¦ç»™alertã€confirmæç¤ºæ¡†ä¸ä¸€æ ·çš„ç”»é£ã€‚
 
 ![View](https://github.com/aphy358/bootstrap.alert/blob/master/screenshot1.jpg)
 ![View](https://github.com/aphy358/bootstrap.alert/blob/master/screenshot2.png)
@@ -24,7 +24,7 @@
 
 ### Usage
 
-Ê×ÏÈÊÇÒıÈëÑùÊ½ÎÄ¼şºÍjsÎÄ¼ş.
+é¦–å…ˆæ˜¯å¼•å…¥æ ·å¼æ–‡ä»¶å’Œjsæ–‡ä»¶.
 
 ```html
 <!-- Required Stylesheets -->
@@ -37,4 +37,4 @@
 <script src="./js/bootstrap.alert.js"></script>
 ```
 
-»ù±¾ÓÃ·¨²ÎÕÕtests.html£¬²»ÔÙÀÛÊö£¬·Ç³£¼òµ¥¡£
+åŸºæœ¬ç”¨æ³•å‚ç…§tests.htmlï¼Œä¸å†ç´¯è¿°ï¼Œéå¸¸ç®€å•ã€‚
