@@ -1,9 +1,53 @@
-.AlertSuccess {
-    background-color:#DFF0D8;
+.modal-dialog {
+	z-index: 9999;
 }
-.AlertWarning {
-    background-color:#FCF8E3;
+
+.modal-header {
+	height: 40px;
 }
-.AlertError {
-    background-color:#F2DEDE;
+
+.modal-title {
+	position: absolute;
+	top: 8px;
+}
+
+.modal-content .close {
+	position: absolute;
+	top: 11px;
+	right: 10px;
+}
+
+.modal-footer {
+	height: 45px;
+}
+
+.modal-footer .cancel {
+	height: 30px;
+	width: 40px;
+	padding: 0px;
+	position: absolute;
+	bottom: 6px;
+	right: 65px;
+}
+
+.modal-footer .confirm {
+	height: 30px;
+	width: 40px;
+	padding: 0px;
+	position: absolute;
+	bottom: 6px;
+	right: 10px;
+	margin-right: 10px;
+}
+
+.modal-dialog .success {
+	background-color: #DFF0D8;
+}
+
+.modal-dialog .warning {
+	background-color: #FCF8E3;
+}
+
+.modal-dialog .error {
+	background-color: #F2DEDE;
 }

@@ -1,223 +1,128 @@
-﻿(function ($) {
-    /**
-     * Show a confirmation dialog
-     * @param [options] {{title, text, confirm, cancel, confirmButton, cancelButton, post, confirmButtonClass}}
-     */
-    $.confirm = function (options) {
-        // Do nothing when active confirm modal.
-        if ($(parent.document.body).find('.confirmation-modal').length > 0) {
-            $(parent.document.body).find('.confirmation-modal').remove();
-        }
+﻿(function($) {
+	/**
+	 * Show a confirmation dialog
+	 * @param [options] {{title, text, confirm, cancel, confirmButton, cancelButton, post, confirmButtonClass}}
+	 */
+	$.confirm = function(options) {
+		var fn = function() {
+			if ($(parent.document.body).find('.confirmation-modal').length > 0) {
+				$(parent.document.body).find('.confirmation-modal').remove();
+				$(parent.document.body).find('.modal-backdrop.fade.in').remove();
+			}
+		};
 
-        // Merge params into settings
-        var settings = $.extend({}, $.confirm.options, options);
+		// 弹窗之前先把之前的弹出框DOM清掉
+		fn();
 
-        // Modal
-        var modalHeader = '';
-        var modalFooter = '';
-        var modalBody = '';
-        var modalConfirmBtn = '';
-        var modalCancelBtn = '';
-        if (options.title != null) {
-            modalHeader =
-                '<div class=modal-header style="height:40px;">' +
-                    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute; top:11px; right:10px;">&times;</button>' +
-                    '<h4 class="modal-title" style="position:absolute; top:8px;">' + settings.title + '</h4>' +
-                '</div>';
+		// Merge params into settings
+		var settings = $.extend({}, $.confirm.options, options);
 
-            modalBody = '<div class="modal-body">' + settings.text + '</div>';
-        }
-        else {
-            modalBody =
-                '<div class="modal-body">' +
-                    (options.confirmButton == null ? ('<button type="button" class="close" data-dismiss="modal" aria-label="true">&times;</button>') : ('')) +
-                    settings.text +
-                '</div>';
-        }
+		var modal = $(settings.modal);
+		var modalContent = $(settings.modalContent);
+		if (options.style) {
+			modalContent.addClass(options.style.toLowerCase());
+		}
+		// 先把主题框架内容加到页面，后续只要对modalContent操作即可
+		$(parent.document.body).append(modal.append($(settings.modalDialog).append(modalContent)));
 
-        if (options.confirmButton != null) {
-            if (options.cancelButton != null) {
-                modalConfirmBtn =
-                    '<button class="confirm btn btn-mini ' + settings.confirmButtonClass + '" type="button" data-dismiss="modal" style="height:30px;width:40px; padding:0px;position:absolute;bottom:6px;right:65px;">' +
-                        settings.confirmButton +
-                    '</button>';
+		if (options.title) {
+			modalHeader = $(settings.modalHeader).append(settings.modalCloseBtn).append($(settings.modalTitle).text(settings.title));
+			modalContent.append(modalHeader).append($(settings.modalBody).text(options.text));
+		} else {
+			modalContent.append($(settings.modalBody).text(options.text).append(settings.modalCloseBtn));
+		}
 
-                modalCancelBtn =
-                    '<button class="cancel btn btn-mini ' + settings.cancelButtonClass + '" type="button" data-dismiss="modal" style=" height:30px;width:40px; padding:0px;position:absolute;bottom:6px;right:10px;margin-right:10px;">' +
-                        settings.cancelButton +
-                    '</button>';
-            }
-            else {
-                modalConfirmBtn =
-                   '<button class="confirm btn btn-mini ' + settings.confirmButtonClass + '" type="button" data-dismiss="modal" style="height:30px;width:40px; padding:0px;position:absolute;bottom:6px;right:10px;margin-right:10px;">' +
-                       settings.confirmButton +
-                   '</button>';
-            }
-        }
+		if (options.opbtn) { // 如果需要生成footer操作按钮“确定”、“取消”
+			var modalFooter = $(settings.modalFooter);
+			modalContent.append(modalFooter);
 
-        if (options.controlButton) {
-            modalFooter =
-                '<div class="modal-footer" style="height:45px;">' +
-                    modalConfirmBtn +
-                    modalCancelBtn +
-                '</div>';
-        }
+			if ("twobtn" == options.opbtn) { // 生成“确定”、“取消”两个按钮
+				modalFooter.append(settings.modalConfirmBtn).append(settings.modalCancelBtn);
+			} else if ("onebtn" == options.opbtn) { // 只生成“确定”按钮
+				modalFooter.append(settings.modalConfirmBtn);
+			}
+		}
 
-        var modalHTML = "";
+		modal.on('shown.bs.modal', function() {});
+		modal.on('hidden.bs.modal', function() {});
+		modal.find(".confirm").click(function() {
+			settings.confirm();
+		});
+		modal.find(".cancel").click(function() {
+			fn();
+		});
+		modal.find(".close").click(function() {
+			fn();
+		});
 
-        if (options.mousePosition) {
-            var newX = window.event.clientX + 30;
-            var newY = window.event.clientY - 80;
+		if (options.opbtn)
+			modal.modal({
+				backdrop: 'static',
+				keyboard: false
+			}); //点击确认框以外部分，确认框不会隐藏
+		else
+			modal.modal('show'); //点击提示框以外部分，提示框隐藏
+	};
 
-            //边界控制，document.documentElement.clientWidth：可见区域宽度  document.documentElement.clientHeight：可见区域高度
-            newX = (newX + 300 > document.documentElement.clientWidth) ? (newX - 300 - 60) : newX;
-            newY = (newY + 30) < 0 ? (newY + 80) : newY;
+	/**
+	 * Globally definable rules
+	 */
+	$.confirm.options = {
+		text: "Are you sure?",
+		title: 'Notice',
+		confirmButton: "Yes",
+		cancelButton: "Cancel",
+		post: false,
+		
+		modal: '<div class="confirmation-modal modal fade" tabindex="-1" role="dialog"></div>',
+		modalDialog: '<div class="modal-dialog"></div>',
+		modalContent: '<div class="modal-content"></div>',
+		modalHeader: '<div class="modal-header"></div>',
+		modalTitle: '<h4 class="modal-title"></h4>',
+		modalCloseBtn: '<button type="button" class="close" data-dismiss="modal">&times;</button>',
+		modalBody: '<div class="modal-body"></div>',
+		modalFooter: '<div class="modal-footer"></div>',
+		modalCancelBtn: '<button class="cancel btn btn-mini btn-default data-dismiss="modal">取消</button>',
+		modalConfirmBtn: '<button class="confirm btn btn-mini btn-primary" data-dismiss="modal">确定</button>',
+	}
 
-            modalHTML =
-                    '<div class="confirmation-modal modal fade" tabindex="-1" role="dialog">' +
-                        '<div class="modal-dialog" style="z-index:9999; position:absolute;">' +
-                            '<div class="modal-content" style="width:300px; left:' + newX + 'px; top:' + newY + 'px; border-radius:0px;">' +
-                                modalHeader +
-                                modalBody +
-                                modalFooter +
-                            '</div>' +
-                        '</div>' +
-                    '</div>';
-        }
-        else {
-            modalHTML =
-                '<div class="confirmation-modal modal fade" tabindex="-1" role="dialog">' +
-                    '<div class="modal-dialog" style="z-index:9999;">' +
-                        '<div class="modal-content">' +
-                            modalHeader +
-                            modalBody +
-                            modalFooter +
-                        '</div>' +
-                    '</div>' +
-                '</div>';
-        }
+	// message是弹出框显示的主题内容，param,可能是字符串，也可能是函数，title是弹出框标题
+	// 这里要判断第二个参数是函数还是一个字符串，如果是字符串，则把这个alert框设置成相应的样式，如果是函数，则执行该回调函数
+	myAlert = function(message, param, title) {
+		var alertParams;
+		if (typeof param == 'function') { // 如果是函数
+			alertParams = {
+				text: message,
+				title: title,
+				opbtn: "onebtn", // 这里的意思是告诉插件只在footer那里生成一个“确定”按钮
+				confirm: function(button) {
+					param();
+				},
+			};
+		} else if (param == null || typeof param == 'string') { // 如果是字符串或为null
+			alertParams = {
+				text: message,
+				title: title,
+				style: param,
+			};
+		}
 
-        var modal = $(modalHTML);
+		$.confirm(alertParams);
+	};
 
-        switch (options.style) {
-            case 'AlertWarning':
-                {
-                    modal.find('.modal-content').addClass('AlertWarning');
-                    break;
-                }
-            case 'AlertSuccess':
-                {
-                    modal.find('.modal-content').addClass('AlertSuccess');
-                    break;
-                }
-            case 'AlertError':
-                {
-                    modal.find('.modal-content').addClass('AlertError');
-                    break;
-                }
-            default:
-                {
-                    break;
-                }
-        }
+	// message是弹出框显示的主题内容，callback是回调函数，title是弹出框标题
+	myConfirm = function(message, callback, title) {
+		var alertParams = {
+			text: message,
+			title: title,
+			opbtn: "twobtn", // 这里的意思是告诉插件在footer那里生成一个“确定”和“取消”按钮
+			confirm: function(button) {
+				if (callback != null)
+					callback();
+			},
+		};
 
-        modal.on('shown.bs.modal', function () {
-        });
-        modal.on('hidden.bs.modal', function () {
-        });
-        modal.find(".confirm").click(function () {
-            settings.confirm();
-        });
-        modal.find(".cancel").click(function () {
-        });
-
-        // Show the modal
-        $(parent.document.body).append(modal);                              //$("body").append(modal);
-
-        if (options.confirm != null)
-            modal.modal({ backdrop: 'static', keyboard: false });           //点击确认框以外部分，确认框不会隐藏
-        else
-            modal.modal('show');                                            //点击提示框以外部分，提示框隐藏
-    };
-
-    /**
-     * Globally definable rules
-     */
-    $.confirm.options = {
-        text: "Are you sure?",
-        title: 'Notice',
-        confirmButton: "Yes",
-        cancelButton: "Cancel",
-        style: null,
-        controlButton: false,
-        mousePosition: false,       //根据鼠标点击的坐标给出alert框的位置
-        post: false,
-        confirmButtonClass: "btn-primary",
-        cancelButtonClass: "btn-default"
-    }
-
-    myAlertWarning = function (message, title) {
-        var alertParams = {
-            text: message,
-            title: title,
-            style: 'AlertWarning',
-        };
-
-        $.confirm(alertParams);
-    };
-
-    myAlertError = function (message, title) {
-        var alertParams = {
-            text: message,
-            title: title,
-            style: 'AlertError',
-        };
-
-        $.confirm(alertParams);
-    };
-
-    myAlertSuccess = function (message, callback, title) {
-        var alertParams;
-        if (callback != null) {
-            alertParams = {
-                text: message,
-                title: title,
-                style: 'AlertSuccess',
-                controlButton: true,
-                confirm: function (button) {
-                    callback();
-                },
-                confirmButton: "确定",
-                confirmButtonClass: "btn-primary",
-            };
-        }
-        else {
-            alertParams = {
-                text: message,
-                title: title,
-                style: 'AlertSuccess',
-            };
-        }
-
-        $.confirm(alertParams);
-    };
-
-    myConfirm = function (message, callback, title) {
-        var alertParams = {
-            text: message,
-            title: title,
-            controlButton: true,
-            confirm: function (button) {
-                if (callback != null)
-                    callback();
-            },
-            confirmButton: "确定",
-            cancelButton: "取消",
-            confirmButtonClass: "btn-primary",
-            cancelButtonClass: "btn-default"
-        };
-
-        $.confirm(alertParams);
-    };
+		$.confirm(alertParams);
+	};
 
 })(jQuery);

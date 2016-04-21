@@ -1,177 +1,176 @@
 ﻿<!DOCTYPE html>
 
 <html>
-<head>
-    <meta charset="utf-8">
 
-    <title>Demo of jquery.confirm with Bootstrap 3</title>
-    <link href="./css/bootstrap.css" rel="stylesheet" />
-    <link href="./css/bootstrap.alert.css" rel="stylesheet" />
+	<head>
+		<meta charset="utf-8">
 
-</head>
+		<title>Demo of jquery.confirm with Bootstrap 3</title>
+		<link href="./css/bootstrap.css" rel="stylesheet" />
+		<link href="./css/bootstrap.alert.css" rel="stylesheet" />
 
-<body class="">
+	</head>
 
-    <div class="container">
-        <div class="page-header">
-            <h1>Tests for bootstrap.alert</h1>
-        </div>
+	<body class="">
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th class="col-lg-3"></th>
-                    <th class="col-lg-1">Demo</th>
-                    <th class="col-lg-8">Code</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>普通的弹出提示框</td>
-                    <td><a class="btn btn-primary" onclick="fn1()">Click me</a></td>
-                    <td>
-                        <pre class="prettyprint"><code>myAlertSuccess("操作成功！");</code></pre>
-                    </td>
-                </tr>
-                <tr>
-                    <td>弹出提示框，点确定后执行回调函数，由于我们的BootAlert无法阻塞后续代码执行，所以要采用回调函数的形式来维持代码的正确执行顺序</td>
-                    <td>
-                        <button class="btn btn-primary" onclick="fn2()" style="display: inline-block;">Click me</button></td>
-                    <td>
-                        <pre class="prettyprint"><code>myAlertSuccess("操作成功！", function () {
+		<div class="container">
+			<div class="page-header">
+				<h1>Tests for bootstrap.alert</h1>
+			</div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="col-lg-3"></th>
+						<th class="col-lg-1">Demo</th>
+						<th class="col-lg-8">Code</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>普通的弹出提示框</td>
+						<td><a class="btn btn-primary" onclick="fn1()">Click me</a></td>
+						<td>
+							<pre class="prettyprint"><code>myAlert("操作成功！","success");</code></pre>
+						</td>
+					</tr>
+					<tr>
+						<td>弹出提示框，点确定后执行回调函数，由于我们的BootAlert无法阻塞后续代码执行，所以要采用回调函数的形式来维持代码的正确执行顺序</td>
+						<td>
+							<button class="btn btn-primary" onclick="fn2()" style="display: inline-block;">Click me</button></td>
+						<td>
+							<pre class="prettyprint"><code>myAlert("操作成功！", function () {
     location.reload();
 });</code></pre>
-                    </td>
-                </tr>
-                <tr>
-                    <td>弹出警告提示框</td>
-                    <td>
-                        <button class="btn btn-primary" onclick="fn3()" data-title="Hello there!" data-confirm-button="Yes I am">Click me</button></td>
-                    <td>
-                        <pre class="prettyprint"><code>myAlertWarning("请输入正确的数字！");</code></pre>
-                    </td>
-                </tr>
-                <tr>
-                    <td>弹出错误提示框</td>
-                    <td>
-                        <button class="btn btn-primary" onclick="fn4()" data-title="Hello there!" data-confirm-button="Yes I am">Click me</button></td>
-                    <td>
-                        <pre class="prettyprint"><code>myAlertError("服务器错误！");</code></pre>
-                    </td>
-                </tr>
-                <tr>
-                    <td>确认提示框(confirm)</td>
-                    <td>
-                        <button class="btn btn-primary" onclick="fn5()">Click me</button></td>
-                    <td>
-                        <pre class="prettyprint"><code>myConfirm("确定要回到主页面吗？", function () {
+						</td>
+					</tr>
+					<tr>
+						<td>弹出警告提示框</td>
+						<td>
+							<button class="btn btn-primary" onclick="fn3()" data-title="Hello there!" data-confirm-button="Yes I am">Click me</button></td>
+						<td>
+							<pre class="prettyprint"><code>myAlert("请输入正确的数字！","warning");</code></pre>
+						</td>
+					</tr>
+					<tr>
+						<td>弹出错误提示框</td>
+						<td>
+							<button class="btn btn-primary" onclick="fn4()" data-title="Hello there!" data-confirm-button="Yes I am">Click me</button></td>
+						<td>
+							<pre class="prettyprint"><code>myAlert("服务器错误！","error");</code></pre>
+						</td>
+					</tr>
+					<tr>
+						<td>确认提示框(confirm)</td>
+						<td>
+							<button class="btn btn-primary" onclick="fn5()">Click me</button></td>
+						<td>
+							<pre class="prettyprint"><code>myConfirm("确定要回到主页面吗？", function () {
     history.go(-1);
 });</code></pre>
-                    </td>
-                </tr>
+						</td>
+					</tr>
 
-
-                <tr>
-                    <td>普通的弹出提示框（带标题）</td>
-                    <td><a class="btn btn-primary" onclick="fn6()">Click me</a></td>
-                    <td>
-                        <pre class="prettyprint"><code>myAlertSuccess("操作成功！", null, "提示");</code></pre>
-                    </td>
-                </tr>
-                <tr>
-                    <td>弹出提示框（带标题），点确定后执行回调函数，由于我们的BootAlert无法阻塞后续代码执行，所以要采用回调函数的形式来维持代码的正确执行顺序</td>
-                    <td>
-                        <button class="btn btn-primary" onclick="fn7()" style="display: inline-block;">Click me</button></td>
-                    <td>
-                        <pre class="prettyprint"><code>myAlertSuccess("操作成功！", function () {
+					<tr>
+						<td>普通的弹出提示框（带标题）</td>
+						<td><a class="btn btn-primary" onclick="fn6()">Click me</a></td>
+						<td>
+							<pre class="prettyprint"><code>myAlert("操作成功！", null, "提示");</code></pre>
+						</td>
+					</tr>
+					<tr>
+						<td>弹出提示框（带标题），点确定后执行回调函数，由于我们的BootAlert无法阻塞后续代码执行，所以要采用回调函数的形式来维持代码的正确执行顺序</td>
+						<td>
+							<button class="btn btn-primary" onclick="fn7()" style="display: inline-block;">Click me</button></td>
+						<td>
+							<pre class="prettyprint"><code>myAlert("操作成功！", function () {
     location.reload();
 },"提示");</code></pre>
-                    </td>
-                </tr>
-                <tr>
-                    <td>弹出警告提示框（带标题）</td>
-                    <td>
-                        <button class="btn btn-primary" onclick="fn8()" data-title="Hello there!" data-confirm-button="Yes I am">Click me</button></td>
-                    <td>
-                        <pre class="prettyprint"><code>myAlertWarning("请输入正确的数字！","警告");</code></pre>
-                    </td>
-                </tr>
-                <tr>
-                    <td>弹出错误提示框（带标题）</td>
-                    <td>
-                        <button class="btn btn-primary" onclick="fn9()" data-title="Hello there!" data-confirm-button="Yes I am">Click me</button></td>
-                    <td>
-                        <pre class="prettyprint"><code>myAlertError("服务器错误！","错误");</code></pre>
-                    </td>
-                </tr>
-                <tr>
-                    <td>确认提示框(confirm)（带标题）</td>
-                    <td>
-                        <button class="btn btn-primary" onclick="fn10()">Click me</button></td>
-                    <td>
-                        <pre class="prettyprint"><code>myConfirm("确定要回到主页面吗？", function () {
+						</td>
+					</tr>
+					<tr>
+						<td>弹出警告提示框（带标题）</td>
+						<td>
+							<button class="btn btn-primary" onclick="fn8()" data-title="Hello there!" data-confirm-button="Yes I am">Click me</button></td>
+						<td>
+							<pre class="prettyprint"><code>myAlert("请输入正确的数字！","warnging","警告");</code></pre>
+						</td>
+					</tr>
+					<tr>
+						<td>弹出错误提示框（带标题）</td>
+						<td>
+							<button class="btn btn-primary" onclick="fn9()" data-title="Hello there!" data-confirm-button="Yes I am">Click me</button></td>
+						<td>
+							<pre class="prettyprint"><code>myAlert("服务器错误！","error","错误");</code></pre>
+						</td>
+					</tr>
+					<tr>
+						<td>确认提示框(confirm)（带标题）</td>
+						<td>
+							<button class="btn btn-primary" onclick="fn10()">Click me</button></td>
+						<td>
+							<pre class="prettyprint"><code>myConfirm("确定要回到主页面吗？", function () {
     history.go(-1);
 },"确认");</code></pre>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 
-        <script src="./js/jquery.js"></script>
-        <script src="./js/bootstrap.min.js"></script>
-        <script src="./js/bootstrap.alert.js"></script>
+			<script src="./js/jquery.js"></script>
+			<script src="./js/bootstrap.min.js"></script>
+			<script src="./js/bootstrap.alert.js"></script>
 
-        <script>
-            function fn1() {
-                myAlertSuccess("操作成功！");
-            };
+			<script>
+				function fn1() {
+					myAlert("操作成功！");
+				};
 
-            function fn2() {
-                myAlertSuccess("操作成功！", function () {
-                    location.reload();
-                });
-            };
+				function fn2() {
+					myAlert("操作成功！", function() {
+						location.reload();
+					});
+				};
 
-            function fn3() {
-                myAlertWarning("请输入正确的数字！");
-            };
+				function fn3() {
+					myAlert("请输入正确的数字！", "Warning");
+				};
 
-            function fn4() {
-                myAlertError("服务器错误！");
-            };
+				function fn4() {
+					myAlert("服务器错误！", "Error");
+				};
 
-            function fn5() {
-                myConfirm("确定要回到主页面吗？", function () {
-                    history.go(-1);
-                });
-            };
+				function fn5() {
+					myConfirm("确定要回到主页面吗？", function() {
+						history.go(-1);
+					});
+				};
 
+				function fn6() {
+					myAlert("操作成功！", null, "提示");
+				};
 
+				function fn7() {
+					myAlert("操作成功！", function() {
+						location.reload();
+					}, "提示");
+				};
 
-            function fn6() {
-                myAlertSuccess("操作成功！",null,"提示");
-            };
+				function fn8() {
+					myAlert("请输入正确的数字！", "Warning", "警告");
+				};
 
-            function fn7() {
-                myAlertSuccess("操作成功！", function () {
-                    location.reload();
-                }, "提示");
-            };
+				function fn9() {
+					myAlert("服务器错误！", "Error", "错误");
+				};
 
-            function fn8() {
-                myAlertWarning("请输入正确的数字！", "警告");
-            };
+				function fn10() {
+					myConfirm("确定要回到主页面吗？", function() {
+						history.go(-1);
+					}, "确认");
+				};
+			</script>
+		</div>
+	</body>
 
-            function fn9() {
-                myAlertError("服务器错误！", "错误");
-            };
-
-            function fn10() {
-                myConfirm("确定要回到主页面吗？", function () {
-                    history.go(-1);
-                }, "确认");
-            };
-        </script>
-    </div>
-</body>
 </html>
