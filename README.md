@@ -10,9 +10,9 @@
 带给alert、confirm提示框不一样的画风。
 UI只是粗略設計，請各位見諒！
 
-![View](https://github.com/aphy358/bootstrap.alert/blob/master/screenshot1.jpg)
-![View](https://github.com/aphy358/bootstrap.alert/blob/master/screenshot2.png)
-![View](https://github.com/aphy358/bootstrap.alert/blob/master/screenshot3.jpg)
+![View](https://github.com/aphy358/bootstrap.alert/blob/master/img/screenshot1.jpg)
+![View](https://github.com/aphy358/bootstrap.alert/blob/master/img/screenshot2.png)
+![View](https://github.com/aphy358/bootstrap.alert/blob/master/img/screenshot3.jpg)
 
 
 ## Dependencies
